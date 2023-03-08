@@ -74,3 +74,4 @@ def vecindad_paralelo_proceso(h,Ni,Nf,pt_g_u):
         indices_arr_lista = indices_arr.astype(int).flatten().tolist()
         pts_veci_local_lista.append(indices_arr_lista)
     return pts_veci_local_lista
+
