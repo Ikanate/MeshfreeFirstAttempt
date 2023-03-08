@@ -63,15 +63,57 @@ def pts_vecindad(arr,pt_c,h):
 
 def vecindad_paralelo_proceso(h,Ni,Nf,pt_g_u):  
     """
-    Objetivo funcion
-    Darle en la madre a todos
+    Objetivo: 
+    Encontrar los puntos vecinos (PT_V) del punto Ni,Ni+1,Ni+2,...,Nf (PT_N) 
+    en un radio de h alrededor del punto
+    y regresar los indices relacionados a los PT_V para cada PT_N
+    a la función encargada de paralelizar este
+    proceso que es vecindad_paralelo_estructura
+    
+    Datos de entrada:
+        h:
+            float
+            
+            Objetivo   ->   Definir el radio de la vecindad en la que se buscaran los puntos vecinos
+        Ni:
+            int
+            Objetivo   ->   Decir el PT_N inicial en el que se empezarán a buscar sus puntos vecinos
+        Nf:
+            int
+            Objetivo   ->   Decir el PT_N al que ya no se buscaran sus puntos vecinos
+            
+        pt_g_u:
+            Arreglo tipo numpy np.float64
+            Dimensiones->   (renglones,columnas)
+                            (      N_r,       2)
+                            N_r es la cantidad de renglones ya determinada por el arreglo recibido
+            Objetivo   ->   Tener las coordenadas de los puntos generados por el avance de frente
+                            
+                            
+    Datos de salida:
+        pts_veci_local_lista
+            Lista de python con puros valores enteros
+            Dimensiones   ->   Variables
+                               Una lista en que cada elemento es una tupla de dos elementos
+                               con una lista como primer elemento que contiene numeros enteros y como segundo elemento un solo valor entero
+            Objetivo      ->    Dar una lista
+ 
     """
     #En este arreglo guardaremos los puntos vecinos de cada punto
     #que toca
     pts_veci_local_lista = []
+    
+    """
+    En este for se mandará a llamar la funcion pts_vecindad
+    que encontrará los PT_V de todos los PT_N y nos los dará
+    en forma de una lista que guarda en sus elementos una lista con los
+    indices de los PT_V para cada PT_N y que dice a q PT_N corresponde
+    """
     for i in range(Ni,N_f):
-        indices_arr = pts_vecindad(pt_g_u[:,:],pt_g[i,:])
-        indices_arr_lista = indices_arr.astype(int).flatten().tolist()
-        pts_veci_local_lista.append(indices_arr_lista)
+        indices_arr = pts_vecindad(pt_g_u[:,:],pt_g[i,:],h)
+        indices_arr_lista =           indices_arr.astype(int).flatten().tolist()
+        pts_veci_local_lista.append((indices_arr_lista,i))
+        
+    
     return pts_veci_local_lista
 
