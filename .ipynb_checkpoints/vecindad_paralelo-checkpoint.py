@@ -49,7 +49,8 @@ def pts_vecindad(arr,pt_c,h):
         
         #Observamos si la distancia entre los puntos pt_c, y arr_u[i] es menor que
         #el radio de la vecindad y 
-        distance = Point(pt_c[0],pt_c[1]).distance(Point(arr_u[i,0],arr_u[i,1]))
+        #distance = Point(pt_c[0],pt_c[1]).distance(Point(arr_u[i,0],arr_u[i,1]))
+        distance = ( (pt_c[0] - arr_u[i,0])**2 + (pt_c[1] - arr_u[i,1])**2 )**0.5
         if (h > distance) and (distance!=0.0):
             #Si es menor entonces guardamos el indice y aumentamos el contador
             indices_arr[cont_in_h,0] = i
