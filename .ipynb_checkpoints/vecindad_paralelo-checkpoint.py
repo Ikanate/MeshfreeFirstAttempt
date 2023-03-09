@@ -109,8 +109,8 @@ def vecindad_paralelo_proceso(h,Ni,Nf,pt_g_u):
     en forma de una lista que guarda en sus elementos una lista con los
     indices de los PT_V para cada PT_N y que dice a q PT_N corresponde
     """
-    for i in range(Ni,N_f):
-        indices_arr = pts_vecindad(pt_g_u[:,:],pt_g[i,:],h)
+    for i in range(Ni,Nf):
+        indices_arr = pts_vecindad(pt_g_u[:,:],pt_g_u[i,:],h)
         indices_arr_lista =           indices_arr.astype(int).flatten().tolist()
         pts_veci_local_lista.append((indices_arr_lista,i))
         
